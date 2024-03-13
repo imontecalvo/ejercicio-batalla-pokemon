@@ -46,6 +46,26 @@ public class Pokemon {
         return this.vida > 0;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getVidaMax() {
+        return vidaMax;
+    }
+
+    public int getDefensa() {
+        return defensa;
+    }
+
+    public int getAtaque() {
+        return ataque;
+    }
+
     public void matar(){
         this.vida = 0;
     }

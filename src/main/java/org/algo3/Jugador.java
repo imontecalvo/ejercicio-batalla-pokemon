@@ -15,6 +15,10 @@ public class Jugador {
         this.indicePokemonActual = indicePokemonActual;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public ArrayList<Pokemon> getPokemones() {
         return pokemones;
     }
@@ -50,5 +54,32 @@ public class Jugador {
         for (Pokemon p: pokemones){
             System.out.printf("Nombre: %s , Vida: %d\n", p.nombre, p.vida);
         }
+    }
+
+
+    public Pokemon getPokemonActual(){
+        return this.pokemones.get(this.indicePokemonActual);
+    }
+
+    public ArrayList<Pokemon> getPokemonesSeleccionables(){
+        ArrayList<Pokemon> seleccionables = new ArrayList<>();
+        for (Pokemon pokemon : this.pokemones){
+            if (pokemon.estaVivo() && pokemon != this.pokemones.get(this.indicePokemonActual)){
+                seleccionables.add(pokemon);
+            }
+        }
+
+        return seleccionables;
+    }
+
+    public ArrayList<Pokemon> getPokemonesRestantes(){
+        ArrayList<Pokemon> restantes = new ArrayList<>();
+        for (Pokemon pokemon : this.pokemones){
+            if (pokemon != this.pokemones.get(this.indicePokemonActual)){
+                restantes.add(pokemon);
+            }
+        }
+
+        return restantes;
     }
 }

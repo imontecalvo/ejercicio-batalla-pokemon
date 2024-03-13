@@ -29,6 +29,10 @@ public class Batalla {
         return this.jugadores[indiceJugador];
     }
 
+    public Jugador[] getJugadores() {
+        return jugadores;
+    }
+
     public void actualizarEstado() {
         if (ganador != null) return;
 
