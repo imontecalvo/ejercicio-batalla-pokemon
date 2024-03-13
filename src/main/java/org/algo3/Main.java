@@ -1,7 +1,6 @@
 package org.algo3;
 
-import org.algo3.items.BoostAtaque;
-import org.algo3.items.Item;
+import org.algo3.items.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -51,10 +50,14 @@ public class Main {
     private static ArrayList<Item> itemList(int n){
         if (n==1){
             Item i1 = new BoostAtaque(3);
-            return new ArrayList<>(List.of(i1));
+            Item i2 = new BoostDefensa(5);
+            Item i3 = new PocionRestauradora(2);
+            Item i4 = new MegaPocionRestauradora(2);
+            return new ArrayList<>(List.of(i1, i2, i3, i4));
         }else{
             Item i1 = new BoostAtaque(1);
-            return new ArrayList<>(List.of(i1));
+            Item i2 = new HiperPocionRestauradora(2);
+            return new ArrayList<>(List.of(i1, i2));
         }
     }
 }

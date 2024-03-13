@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Pokemon {
     private final static float BOOST_ATAQUE = 0.1f;
+    private final static float BOOST_DEFENSA = 0.1f;
     public String nombre;
     private int nivel;
     private Tipo tipo;
@@ -76,5 +77,13 @@ public class Pokemon {
 
     public void boostAtaque(){
         this.ataque+=this.ataque*BOOST_ATAQUE;
+    }
+
+    public void boostDefensa() {
+        this.defensa+=this.defensa*BOOST_DEFENSA;
+    }
+
+    public void restaurarVida(float capacidad) {
+        this.vida = Math.min(this.vida + capacidad, this.vidaMax);
     }
 }

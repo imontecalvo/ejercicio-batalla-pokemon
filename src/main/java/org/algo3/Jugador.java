@@ -64,25 +64,33 @@ public class Jugador {
         return this.pokemones.get(this.indicePokemonActual);
     }
 
-    public ArrayList<Pokemon> getPokemonesSeleccionables(){
-        ArrayList<Pokemon> seleccionables = new ArrayList<>();
+    /*
+     * Devuelve todos los pokemones vivos.
+     */
+    public ArrayList<Pokemon> getPokemonesVivos() {
+        ArrayList<Pokemon> vivos = new ArrayList<>();
         for (Pokemon pokemon : this.pokemones){
-            if (pokemon.estaVivo() && pokemon != this.pokemones.get(this.indicePokemonActual)){
-                seleccionables.add(pokemon);
-            }
+            if (pokemon.estaVivo()){vivos.add(pokemon);}
         }
+        return vivos;
+    }
 
+    /*
+    * Devuelve los posibles pokemones por los que se puede intercambiar el actual.
+    * Esto es, aquellos que estan vivos y son distintos del actual.
+    */
+    public ArrayList<Pokemon> getPokemonesSeleccionables(){
+        ArrayList<Pokemon> seleccionables = this.getPokemonesVivos();
+        seleccionables.remove(indicePokemonActual);
         return seleccionables;
     }
 
+    /*
+     * Devuelve todos los pokemones menos el actual.
+     */
     public ArrayList<Pokemon> getPokemonesRestantes(){
-        ArrayList<Pokemon> restantes = new ArrayList<>();
-        for (Pokemon pokemon : this.pokemones){
-            if (pokemon != this.pokemones.get(this.indicePokemonActual)){
-                restantes.add(pokemon);
-            }
-        }
-
+        ArrayList<Pokemon> restantes = (ArrayList<Pokemon>) this.pokemones.clone();
+        restantes.remove(this.indicePokemonActual);
         return restantes;
     }
 
@@ -93,4 +101,6 @@ public class Jugador {
     public ArrayList<Item> getItems() {
         return items;
     }
+
+
 }

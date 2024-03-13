@@ -2,7 +2,9 @@ package org.algo3;
 
 import org.algo3.acciones.*;
 import org.algo3.items.BoostAtaque;
+import org.algo3.items.BoostDefensa;
 import org.algo3.items.Item;
+import org.algo3.items.PocionRestauradoraDeVida;
 import org.algo3.vista.Vista;
 
 import java.util.ArrayList;
@@ -68,10 +70,23 @@ public class AdminDeAcciones {
         int indiceItem = scanner.nextInt()-1;
         Item itemSeleccionado= listaItems.get(indiceItem);
 
-        if(itemSeleccionado instanceof BoostAtaque){
+        if(itemSeleccionado instanceof BoostAtaque || itemSeleccionado instanceof BoostDefensa){
             return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, jugador.getPokemonActual());
+
+        }else if (itemSeleccionado instanceof PocionRestauradoraDeVida){
+            ArrayList<Pokemon> pokemonesVivos = jugador.getPokemonesVivos();
+            System.out.println("¿A cuál pokemon lo deseas aplicar?");
+            i = 1;
+            for (Pokemon pokemon : pokemonesVivos){
+                System.out.printf("\t%d. %s\n", i, pokemon.getNombre());
+                i++;
+            }
+            System.out.print("Seleccionar pokemon: ");
+            int indicePokemon = scanner.nextInt()-1;
+            Pokemon pokemonSeleccionado = jugador.getPokemones().get(indicePokemon);
+            return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, pokemonSeleccionado);
+
         }
-        System.out.println("¿A cuál pokemon lo deseas aplicar?");
         return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, jugador.getPokemonActual());
         //return new UsoDeItem(itemSeleccionado);
     }
