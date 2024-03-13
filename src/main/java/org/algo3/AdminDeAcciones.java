@@ -1,21 +1,20 @@
 package org.algo3;
 
-import org.algo3.Batalla;
-import org.algo3.acciones.Accion;
-import org.algo3.acciones.Ataque;
-import org.algo3.acciones.CambioDePokemon;
-import org.algo3.acciones.Rendicion;
+import org.algo3.acciones.*;
+import org.algo3.items.BoostAtaque;
+import org.algo3.items.Item;
 import org.algo3.vista.Vista;
-import org.algo3.vista.VistaPokemon;
 
-import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class AdminDeAcciones {
     private Batalla batalla;
     private int indiceJugador;
     private boolean ataqueRealizado;
+
+    private HashSet<Item> itemsUsados;
 
     private Vista vista;
 
@@ -46,6 +45,8 @@ public class AdminDeAcciones {
                 return new Rendicion(this.batalla, this.indiceJugador);
             case 2:
                 return manejarCambioDePokemon();
+            case 3:
+                return manejarUsoDeItem();
             case 4:
                 return manejarAtaque();
             default:
@@ -53,7 +54,28 @@ public class AdminDeAcciones {
         }
     }
 
-    //TODO: Validar seleccion + astraer interaccion en Vista
+    private Accion manejarUsoDeItem() {
+        Scanner scanner = new Scanner(System.in);
+        Jugador jugador = this.batalla.getJugador(this.indiceJugador);
+        ArrayList<Item> listaItems= jugador.getItems();
+        int i = 1;
+        for (Item item : listaItems){
+            System.out.printf("%d. %s x%d\n", i, item.getNombre(), item.getCantidad());
+            i++;
+        }
+        System.out.print("Seleccionar item: ");
+        int indiceItem = scanner.nextInt()-1;
+        Item itemSeleccionado= listaItems.get(indiceItem);
+
+        if(itemSeleccionado instanceof BoostAtaque){
+            return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, jugador.getPokemonActual());
+        }
+        System.out.println("¿A cuál pokemon lo deseas aplicar?");
+        return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, jugador.getPokemonActual());
+        //return new UsoDeItem(itemSeleccionado);
+    }
+
+    //TODO: Validar seleccion + astraer interaccion en Vista + mostrar listado pokemones
     private Accion manejarCambioDePokemon(){
         Jugador jugador= this.batalla.getJugador(this.indiceJugador);
         ArrayList<Pokemon> pokemones = jugador.getPokemonesSeleccionables();

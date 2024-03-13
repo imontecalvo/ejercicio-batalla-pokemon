@@ -1,4 +1,6 @@
 package org.algo3;
+import org.algo3.items.Item;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,13 +8,14 @@ public class Jugador {
     public String nombre;
     public ArrayList<Pokemon> pokemones;
     private int indicePokemonActual;
-    //List<Item> items;
+    private ArrayList<Item> items;
 
 
-    public Jugador(String nombre, ArrayList<Pokemon> pokemones, int indicePokemonActual) {
+    public Jugador(String nombre, ArrayList<Pokemon> pokemones, int indicePokemonActual, ArrayList<Item> items) {
         this.nombre = nombre;
         this.pokemones = pokemones;
         this.indicePokemonActual = indicePokemonActual;
+        this.items = items;
     }
 
     public String getNombre() {
@@ -23,8 +26,8 @@ public class Jugador {
         return pokemones;
     }
 
-    public int maxVelocidad(){
-        int max = 0;
+    public float maxVelocidad(){
+        float max = 0;
         for (Pokemon pokemon : this.pokemones){
             max = Math.max(max, pokemon.getVelocidad());
         }
@@ -85,5 +88,9 @@ public class Jugador {
 
     public void setPokemonActual(Pokemon pokemon){
         this.indicePokemonActual = this.pokemones.indexOf(pokemon);
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 }

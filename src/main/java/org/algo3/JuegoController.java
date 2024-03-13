@@ -13,9 +13,9 @@ public class JuegoController {
 
     private  static int primerTurno(Batalla batalla){
         int indiceJugador = 0;
-        int maxVelocidadTotal = 0;
+        float maxVelocidadTotal = 0;
         for (int i = 0; i < Batalla.CANTIDAD_JUGADORES; i++){
-            int velocidadActual = batalla.getJugador(i).maxVelocidad();
+            float velocidadActual = batalla.getJugador(i).maxVelocidad();
             if (velocidadActual > maxVelocidadTotal){
                 maxVelocidadTotal = velocidadActual;
                 indiceJugador = i;

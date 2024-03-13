@@ -12,9 +12,10 @@ public class Ataque extends Accion{
         this.atacado = batalla.getOponente(indiceJugador);
     }
 
+    //TODO: Calcular ataque con todas las variables y su respectiva formula
     @Override
     public void ejecutar() {
-        final int ataque = this.atacante.getPokemonActual().getAtaque();
+        final float ataque = this.atacante.getPokemonActual().getAtaque();
         this.atacado.getPokemonActual().reducirVida(ataque);
     }
 }

@@ -3,17 +3,18 @@ package org.algo3;
 import java.util.Objects;
 
 public class Pokemon {
+    private final static float BOOST_ATAQUE = 0.1f;
     public String nombre;
     private int nivel;
     private Tipo tipo;
     private String historia;
-    public int vida;
-    private int vidaMax;
-    private int velocidad;
-    private int defensa;
-    private int ataque;
+    public float vida;
+    private float vidaMax;
+    private float velocidad;
+    private float defensa;
+    private float ataque;
 
-    public Pokemon(String nombre, int nivel, Tipo tipo, String historia, int vidaMax, int velocidad, int defensa, int ataque) {
+    public Pokemon(String nombre, int nivel, Tipo tipo, String historia, float vidaMax, float velocidad, float defensa, float ataque) {
         this.nombre = nombre;
         this.nivel = nivel;
         this.tipo = tipo;
@@ -33,12 +34,7 @@ public class Pokemon {
         return nivel == pokemon.nivel && vidaMax == pokemon.vidaMax && velocidad == pokemon.velocidad && defensa == pokemon.defensa && ataque == pokemon.ataque && Objects.equals(nombre, pokemon.nombre) && tipo == pokemon.tipo && Objects.equals(historia, pokemon.historia);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(nombre, nivel, tipo, historia, vidaMax, velocidad, defensa, ataque);
-    }
-
-    public int getVelocidad() {
+    public float getVelocidad() {
         return this.velocidad;
     }
 
@@ -50,23 +46,23 @@ public class Pokemon {
         return nombre;
     }
 
-    public int getVida() {
+    public float getVida() {
         return vida;
     }
 
-    public int getVidaMax() {
+    public float getVidaMax() {
         return vidaMax;
     }
 
-    public int getDefensa() {
+    public float getDefensa() {
         return defensa;
     }
 
-    public int getAtaque() {
+    public float getAtaque() {
         return ataque;
     }
 
-    public void reducirVida(int ataque){
+    public void reducirVida(float ataque){
         this.vida = Math.max(0, this.vida - ataque);
     }
 
@@ -74,4 +70,11 @@ public class Pokemon {
         this.vida = 0;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void boostAtaque(){
+        this.ataque+=this.ataque*BOOST_ATAQUE;
+    }
 }

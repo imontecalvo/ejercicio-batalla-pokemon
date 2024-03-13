@@ -1,5 +1,9 @@
 package org.algo3;
 
+import org.algo3.items.BoostAtaque;
+import org.algo3.items.Item;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -11,29 +15,23 @@ public class Main {
         ArrayList<Pokemon> l1 = pokemonList(1);
         ArrayList<Pokemon> l2 = pokemonList(2);
 
-        Jugador p1 = new Jugador("Jugador 1", l1, 0);
-        Jugador p2 = new Jugador("Jugador 2", l2, 0);
+        ArrayList<Item> i1 = itemList(1);
+        ArrayList<Item> i2 = itemList(2);
+
+        Jugador p1 = new Jugador("Jugador 1", l1, 0, i1);
+        Jugador p2 = new Jugador("Jugador 2", l2, 0, i2);
         Jugador[] jugadores = {p1,p2};
 
         Batalla batalla = new Batalla(jugadores);
 
         JuegoController juego = new JuegoController(batalla);
 
-        int contador = 0;
-
         do{
-            //if (contador == 3) l2.get(0).matar();
-            //if (contador == 5) l2.get(1).matar();
-            //if (contador == 7) l2.get(2).matar();
             juego.jugarTurno();
-            //if (contador >= 10) batalla.setGanador(p1);
-            //contador++;
             System.out.println();
         }while (!batalla.estaTerminada());
 
         System.out.printf("Batalla terminada. Ganador: %s\n", batalla.getGanador());
-        p1.info();
-
     }
 
     private static ArrayList<Pokemon> pokemonList(int n){
@@ -47,6 +45,16 @@ public class Main {
             Pokemon p2 = new Pokemon("Duki", 3, Tipo.FANTASMA, ",,,", 150, 70, 120, 90);
             Pokemon p3 = new Pokemon("CR7", 7, Tipo.BICHO, ",,,", 200, 120, 90, 150);
             return new ArrayList<>(List.of(p1,p2,p3));
+        }
+    }
+
+    private static ArrayList<Item> itemList(int n){
+        if (n==1){
+            Item i1 = new BoostAtaque(3);
+            return new ArrayList<>(List.of(i1));
+        }else{
+            Item i1 = new BoostAtaque(1);
+            return new ArrayList<>(List.of(i1));
         }
     }
 }
