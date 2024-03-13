@@ -2,6 +2,7 @@ package org.algo3;
 
 import org.algo3.Batalla;
 import org.algo3.acciones.Accion;
+import org.algo3.acciones.Ataque;
 import org.algo3.acciones.CambioDePokemon;
 import org.algo3.acciones.Rendicion;
 import org.algo3.vista.Vista;
@@ -45,22 +46,28 @@ public class AdminDeAcciones {
                 return new Rendicion(this.batalla, this.indiceJugador);
             case 2:
                 return manejarCambioDePokemon();
+            case 4:
+                this.ataqueRealizado = true;
+                return new Ataque(this.batalla, this.indiceJugador);
             default:
                 return null;
         }
     }
 
+    //TODO: Validar seleccion + astraer interaccion en Vista
     private Accion manejarCambioDePokemon(){
         Jugador jugador= this.batalla.getJugador(this.indiceJugador);
         ArrayList<Pokemon> pokemones = jugador.getPokemonesSeleccionables();
-        int i = 0;
+        int i = 1;
         for (Pokemon pokemon : pokemones){
             System.out.printf("\t%d. %s\n", i, pokemon.getNombre());
+            i++;
         }
         System.out.print("Seleccionar pokemon: ");
         Scanner scanner = new Scanner(System.in);
-        int indicePokemon = scanner.nextInt();
+        int indicePokemon = scanner.nextInt()-1;
 
+        jugador.setPokemonActual(pokemones.get(indicePokemon));
         return new CambioDePokemon(batalla, indiceJugador, pokemones.get(indicePokemon));
     }
 

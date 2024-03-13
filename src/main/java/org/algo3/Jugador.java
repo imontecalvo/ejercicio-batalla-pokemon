@@ -82,4 +82,8 @@ public class Jugador {
 
         return restantes;
     }
+
+    public void setPokemonActual(Pokemon pokemon){
+        this.indicePokemonActual = this.pokemones.indexOf(pokemon);
+    }
 }
