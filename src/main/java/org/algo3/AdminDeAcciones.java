@@ -37,7 +37,7 @@ public class AdminDeAcciones {
     private Accion solicitarAccion(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Seleccionar accion:\n\t1. Rendirse\n\t2. Cambiar pokemon\n\t3. Usar item\n\t4. Atacar");
-        System.out.print("Relaizar accion: ");
+        System.out.print("Realizar accion: ");
         int inputAccion = scanner.nextInt();
         //int inputAccion = 1;
 
@@ -47,8 +47,7 @@ public class AdminDeAcciones {
             case 2:
                 return manejarCambioDePokemon();
             case 4:
-                this.ataqueRealizado = true;
-                return new Ataque(this.batalla, this.indiceJugador);
+                return manejarAtaque();
             default:
                 return null;
         }
@@ -69,6 +68,11 @@ public class AdminDeAcciones {
 
         jugador.setPokemonActual(pokemones.get(indicePokemon));
         return new CambioDePokemon(batalla, indiceJugador, pokemones.get(indicePokemon));
+    }
+
+    private Accion manejarAtaque(){
+        this.ataqueRealizado = true;
+        return new Ataque(this.batalla, this.indiceJugador);
     }
 
 }

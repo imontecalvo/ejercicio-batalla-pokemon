@@ -29,7 +29,7 @@ public class JuegoController {
         System.out.printf("Jugando Turno: %d\n", this.turno + 1);
 
         Jugador jugadorActual = batalla.getJugador(this.turno);
-        jugadorActual.seleccionarPokemon();
+        jugadorActual.seleccionarPokemon(); //TODO: Mostrar lista, abstraer en vista y validar (rangos y no elegir poke muertos)
 
         AdminDeAcciones adminDeAcciones = new AdminDeAcciones(this.batalla, this.turno);
         adminDeAcciones.manejarAcciones();

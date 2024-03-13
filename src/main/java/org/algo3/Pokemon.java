@@ -66,7 +66,12 @@ public class Pokemon {
         return ataque;
     }
 
+    public void reducirVida(int ataque){
+        this.vida = Math.max(0, this.vida - ataque);
+    }
+
     public void matar(){
         this.vida = 0;
     }
+
 }

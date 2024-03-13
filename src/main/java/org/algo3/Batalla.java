@@ -26,8 +26,13 @@ public class Batalla {
     }
 
     public Jugador getJugador(int indiceJugador){
+
         return this.jugadores[indiceJugador];
     }
+    public Jugador getOponente(int indiceJugador){
+        return this.jugadores[(indiceJugador+1)%CANTIDAD_JUGADORES];
+    }
+
 
     public Jugador[] getJugadores() {
         return jugadores;
