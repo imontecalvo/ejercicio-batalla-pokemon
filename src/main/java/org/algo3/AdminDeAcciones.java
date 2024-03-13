@@ -83,12 +83,22 @@ public class AdminDeAcciones {
             }
             System.out.print("Seleccionar pokemon: ");
             int indicePokemon = scanner.nextInt()-1;
-            Pokemon pokemonSeleccionado = jugador.getPokemones().get(indicePokemon);
+            Pokemon pokemonSeleccionado = pokemonesVivos.get(indicePokemon);
             return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, pokemonSeleccionado);
 
+        }else{
+            ArrayList<Pokemon> pokemonesMuertos = jugador.getPokemonesMuertos();
+            System.out.println("¿Cuál pokemon deseas revivir?");
+            i = 1;
+            for (Pokemon pokemon : pokemonesMuertos){
+                System.out.printf("\t%d. %s\n", i, pokemon.getNombre());
+                i++;
+            }
+            System.out.print("Seleccionar pokemon: ");
+            int indicePokemon = scanner.nextInt()-1;
+            Pokemon pokemonSeleccionado = pokemonesMuertos.get(indicePokemon);
+            return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, pokemonSeleccionado);
         }
-        return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, jugador.getPokemonActual());
-        //return new UsoDeItem(itemSeleccionado);
     }
 
     //TODO: Validar seleccion + astraer interaccion en Vista

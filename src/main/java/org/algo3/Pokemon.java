@@ -86,4 +86,8 @@ public class Pokemon {
     public void restaurarVida(float capacidad) {
         this.vida = Math.min(this.vida + capacidad, this.vidaMax);
     }
+
+    public void revivir() {
+        this.vida = this.vidaMax;
+    }
 }

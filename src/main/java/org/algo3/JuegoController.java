@@ -26,8 +26,6 @@ public class JuegoController {
     }
 
     public void jugarTurno(){
-        System.out.printf("Jugando Turno: %d\n", this.turno + 1);
-
         Jugador jugadorActual = batalla.getJugador(this.turno);
         jugadorActual.seleccionarPokemon(); //TODO: Mostrar lista, abstraer en vista y validar (rangos y no elegir poke muertos)
 

@@ -53,7 +53,8 @@ public class Main {
             Item i2 = new BoostDefensa(5);
             Item i3 = new PocionRestauradora(2);
             Item i4 = new MegaPocionRestauradora(2);
-            return new ArrayList<>(List.of(i1, i2, i3, i4));
+            Item i5 = new Resurreccion(5);
+            return new ArrayList<>(List.of(i1, i2, i3, i4, i5));
         }else{
             Item i1 = new BoostAtaque(1);
             Item i2 = new HiperPocionRestauradora(2);

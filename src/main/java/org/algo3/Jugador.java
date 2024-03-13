@@ -103,4 +103,11 @@ public class Jugador {
     }
 
 
+    public ArrayList<Pokemon> getPokemonesMuertos() {
+        ArrayList<Pokemon> muertos = new ArrayList<>();
+        for (Pokemon pokemon : this.pokemones){
+            if (!pokemon.estaVivo()){muertos.add(pokemon);}
+        }
+        return muertos;
+    }
 }
