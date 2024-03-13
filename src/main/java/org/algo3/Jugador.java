@@ -38,9 +38,16 @@ public class Jugador {
     public void seleccionarPokemon(){
         Pokemon pokemonActual = pokemones.get(indicePokemonActual);
         if (!pokemonActual.estaVivo()){
+            ArrayList<Pokemon> seleccionables = getPokemonesSeleccionables();
+            int i = 1;
+            System.out.println("Elegí un nuevo pokemon: ");
+            for(Pokemon pokemon : seleccionables){
+                System.out.printf("%d. %s\n", i, pokemon.getNombre());
+                i++;
+            }
+            System.out.print("Seleccionar pokemon: ");
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Elegí un nuevo pokemon: ");
-            this.indicePokemonActual = scanner.nextInt();
+            this.indicePokemonActual = this.pokemones.indexOf(seleccionables.get(scanner.nextInt()-1));
         }
     }
 
@@ -81,7 +88,8 @@ public class Jugador {
     */
     public ArrayList<Pokemon> getPokemonesSeleccionables(){
         ArrayList<Pokemon> seleccionables = this.getPokemonesVivos();
-        seleccionables.remove(indicePokemonActual);
+        Pokemon pokemonActual = pokemones.get(indicePokemonActual);
+        seleccionables.remove(pokemonActual);
         return seleccionables;
     }
 
@@ -90,7 +98,8 @@ public class Jugador {
      */
     public ArrayList<Pokemon> getPokemonesRestantes(){
         ArrayList<Pokemon> restantes = (ArrayList<Pokemon>) this.pokemones.clone();
-        restantes.remove(this.indicePokemonActual);
+        Pokemon pokemonActual = pokemones.get(indicePokemonActual);
+        restantes.remove(pokemonActual);
         return restantes;
     }
 
