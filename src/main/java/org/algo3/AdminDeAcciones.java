@@ -54,13 +54,14 @@ public class AdminDeAcciones {
         }
     }
 
+    //TODO: Validar seleccion, solo mostrar items con cantidad > 0
     private Accion manejarUsoDeItem() {
         Scanner scanner = new Scanner(System.in);
         Jugador jugador = this.batalla.getJugador(this.indiceJugador);
         ArrayList<Item> listaItems= jugador.getItems();
         int i = 1;
         for (Item item : listaItems){
-            System.out.printf("%d. %s x%d\n", i, item.getNombre(), item.getCantidad());
+            System.out.printf("\t%d. %s x%d\n", i, item.getNombre(), item.getCantidad());
             i++;
         }
         System.out.print("Seleccionar item: ");
@@ -75,7 +76,7 @@ public class AdminDeAcciones {
         //return new UsoDeItem(itemSeleccionado);
     }
 
-    //TODO: Validar seleccion + astraer interaccion en Vista + mostrar listado pokemones
+    //TODO: Validar seleccion + astraer interaccion en Vista
     private Accion manejarCambioDePokemon(){
         Jugador jugador= this.batalla.getJugador(this.indiceJugador);
         ArrayList<Pokemon> pokemones = jugador.getPokemonesSeleccionables();
