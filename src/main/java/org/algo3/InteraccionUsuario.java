@@ -47,8 +47,6 @@ public class InteraccionUsuario {
 
 /*
 * TODO:
-*  1. No poder usar items cuando cant = 0
-*  2. Opcion ir para atras
 *  3. Si no hay items en UsarItem o no hay pokemon en CambiarPokemon (array vacio) mostrar msj
 *  4. Chequear input indice en rango y que sea entero
 * */

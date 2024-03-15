@@ -1,6 +1,7 @@
 package org.algo3.acciones;
 
 import org.algo3.Batalla;
+import org.algo3.Jugador;
 import org.algo3.Pokemon;
 import org.algo3.items.Item;
 
@@ -17,5 +18,9 @@ public class UsoDeItem extends Accion{
     @Override
     public void ejecutar(){
         this.item.usar(this.pokemonAfectado);
+        if (item.getCantidad() == 0){
+            Jugador jugador = batalla.getJugador(indiceJugador);
+            jugador.eliminarItem(item);
+        }
     }
 }
