@@ -15,12 +15,22 @@ public class InteraccionUsuario {
         System.out.printf("\nSeleccionar %s:\n", keyword);
         listarOpciones(opciones, cancelarSeleccion);
         System.out.print("--> Selección: ");
-        int inputAccion = scanner.nextInt();
+        boolean inputValido = false;
+        int inputAccion = 0;
 
-        while (!esValido(inputAccion, opciones.length)){
-            System.out.println("\nERROR: Input inválido, por favor seleccione de nuevo.");
-            System.out.print("--> Selección: ");
-            inputAccion = scanner.nextInt();
+        while (!inputValido){
+            if (scanner.hasNextInt()){
+                inputAccion = scanner.nextInt();
+                int cantidadOpciones = opciones.length + (cancelarSeleccion ? 1 : 0);
+                inputValido = esValido(inputAccion, cantidadOpciones);
+            }else{
+                scanner.next();
+            }
+
+            if (!inputValido){
+                System.out.println("\nERROR: Input inválido, por favor seleccione de nuevo.");
+                System.out.print("--> Selección: ");
+            }
         }
 
         return inputAccion;
@@ -40,7 +50,7 @@ public class InteraccionUsuario {
 
     //TODO: Agregar validaciones
     private boolean esValido(int input, int cantOpciones){
-        return true;
+        return (input >= 1) && (input <= cantOpciones);
     }
 }
 
@@ -48,5 +58,4 @@ public class InteraccionUsuario {
 /*
 * TODO:
 *  3. Si no hay items en UsarItem o no hay pokemon en CambiarPokemon (array vacio) mostrar msj
-*  4. Chequear input indice en rango y que sea entero
 * */
