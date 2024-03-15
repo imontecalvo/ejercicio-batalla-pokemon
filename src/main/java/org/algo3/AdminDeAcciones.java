@@ -50,7 +50,6 @@ public class AdminDeAcciones {
         };
     }
 
-    //TODO: Validar seleccion, solo mostrar items con cantidad > 0
     private Accion manejarUsoDeItem() {
         ArrayList<Item> listaItems= jugador.getItems();
         String[] opcionesItems = listaItems.stream()
@@ -84,7 +83,6 @@ public class AdminDeAcciones {
         return opcion == cantidadOpciones;
     }
 
-    //TODO: Validar seleccion + astraer interaccion en Vista
     private Accion manejarCambioDePokemon(){
         Pokemon pokemonSeleccionado = solicitarPokemon(jugador.getPokemonesSeleccionables());
         if (pokemonSeleccionado==null) return null;

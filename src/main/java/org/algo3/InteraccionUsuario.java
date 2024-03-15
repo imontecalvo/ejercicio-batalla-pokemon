@@ -38,6 +38,9 @@ public class InteraccionUsuario {
 
     private void listarOpciones(String[] opciones, boolean cancelarSeleccion){
         int i = 1;
+        if (opciones.length == 0){
+            System.out.println("\tNo hay opciones disponibles!");
+        }
         for (String o : opciones){
             System.out.printf("\t%d. %s\n", i, o);
             i++;
@@ -47,15 +50,7 @@ public class InteraccionUsuario {
         }
     }
 
-
-    //TODO: Agregar validaciones
     private boolean esValido(int input, int cantOpciones){
         return (input >= 1) && (input <= cantOpciones);
     }
 }
-
-
-/*
-* TODO:
-*  3. Si no hay items en UsarItem o no hay pokemon en CambiarPokemon (array vacio) mostrar msj
-* */
