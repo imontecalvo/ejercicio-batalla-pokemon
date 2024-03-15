@@ -19,12 +19,14 @@ public class AdminDeAcciones {
     private HashSet<Item> itemsUsados;
 
     private Vista vista;
+    private InteraccionUsuario interaccionUsuario;
 
-    public AdminDeAcciones(Batalla batalla, int indiceJugador) {
+    public AdminDeAcciones(Batalla batalla, int indiceJugador, Vista vista) {
         this.batalla = batalla;
         this.indiceJugador = indiceJugador;
         this.ataqueRealizado = false;
-        this.vista = new Vista(batalla);
+        this.vista = vista;
+        this.interaccionUsuario = new InteraccionUsuario(batalla);
     }
 
     public void manejarAcciones(){
@@ -36,11 +38,8 @@ public class AdminDeAcciones {
     }
 
     private Accion solicitarAccion(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Seleccionar accion:\n\t1. Rendirse\n\t2. Cambiar pokemon\n\t3. Usar item\n\t4. Atacar");
-        System.out.print("Realizar accion: ");
-        int inputAccion = scanner.nextInt();
-        //int inputAccion = 1;
+        String[] opciones = {"Rendirse","Cambiar pokemon","Usar item","Atacar"};
+        int inputAccion = this.interaccionUsuario.solicitarOpcion(opciones, "accion");
 
         switch (inputAccion){
             case 1:
@@ -58,62 +57,41 @@ public class AdminDeAcciones {
 
     //TODO: Validar seleccion, solo mostrar items con cantidad > 0
     private Accion manejarUsoDeItem() {
-        Scanner scanner = new Scanner(System.in);
         Jugador jugador = this.batalla.getJugador(this.indiceJugador);
         ArrayList<Item> listaItems= jugador.getItems();
-        int i = 1;
-        for (Item item : listaItems){
-            System.out.printf("\t%d. %s x%d\n", i, item.getNombre(), item.getCantidad());
-            i++;
-        }
-        System.out.print("Seleccionar item: ");
-        int indiceItem = scanner.nextInt()-1;
+        String[] opcionesItems = listaItems.stream()
+                .map(item -> String.format("%s x%d",item.getNombre(), item.getCantidad()))
+                .toArray(String[]::new);
+
+        int indiceItem = this.interaccionUsuario.solicitarOpcion(opcionesItems, "item")-1;
         Item itemSeleccionado= listaItems.get(indiceItem);
 
         if(itemSeleccionado instanceof BoostAtaque || itemSeleccionado instanceof BoostDefensa){
             return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, jugador.getPokemonActual());
 
         }else if (itemSeleccionado instanceof PocionRestauradoraDeVida){
-            ArrayList<Pokemon> pokemonesVivos = jugador.getPokemonesVivos();
-            System.out.println("¿A cuál pokemon lo deseas aplicar?");
-            i = 1;
-            for (Pokemon pokemon : pokemonesVivos){
-                System.out.printf("\t%d. %s\n", i, pokemon.getNombre());
-                i++;
-            }
-            System.out.print("Seleccionar pokemon: ");
-            int indicePokemon = scanner.nextInt()-1;
-            Pokemon pokemonSeleccionado = pokemonesVivos.get(indicePokemon);
+            Pokemon pokemonSeleccionado = solicitarPokemon(jugador.getPokemonesVivos());
             return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, pokemonSeleccionado);
 
         }else{
-            ArrayList<Pokemon> pokemonesMuertos = jugador.getPokemonesMuertos();
-            System.out.println("¿Cuál pokemon deseas revivir?");
-            i = 1;
-            for (Pokemon pokemon : pokemonesMuertos){
-                System.out.printf("\t%d. %s\n", i, pokemon.getNombre());
-                i++;
-            }
-            System.out.print("Seleccionar pokemon: ");
-            int indicePokemon = scanner.nextInt()-1;
-            Pokemon pokemonSeleccionado = pokemonesMuertos.get(indicePokemon);
+            Pokemon pokemonSeleccionado = solicitarPokemon(jugador.getPokemonesMuertos());
             return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, pokemonSeleccionado);
         }
+    }
+
+    private Pokemon solicitarPokemon(ArrayList<Pokemon> pokemones){
+        String[] opcionesPokemon = pokemones.stream().map(Pokemon::getNombre).toArray(String[]::new);
+        int indicePokemon = interaccionUsuario.solicitarOpcion(opcionesPokemon,"pokemon")-1;
+        return pokemones.get(indicePokemon);
     }
 
     //TODO: Validar seleccion + astraer interaccion en Vista
     private Accion manejarCambioDePokemon(){
         Jugador jugador= this.batalla.getJugador(this.indiceJugador);
         ArrayList<Pokemon> pokemones = jugador.getPokemonesSeleccionables();
-        int i = 1;
-        for (Pokemon pokemon : pokemones){
-            System.out.printf("\t%d. %s\n", i, pokemon.getNombre());
-            i++;
-        }
-        System.out.print("Seleccionar pokemon: ");
-        Scanner scanner = new Scanner(System.in);
-        int indicePokemon = scanner.nextInt()-1;
+        String[] opciones = pokemones.stream().map(Pokemon::getNombre).toArray(String[]::new);
 
+        int indicePokemon = this.interaccionUsuario.solicitarOpcion(opciones, "pokemon")-1;
         jugador.setPokemonActual(pokemones.get(indicePokemon));
         return new CambioDePokemon(batalla, indiceJugador, pokemones.get(indicePokemon));
     }

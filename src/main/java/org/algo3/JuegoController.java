@@ -1,14 +1,18 @@
 package org.algo3;
 
+import org.algo3.vista.Vista;
+
 import java.util.ArrayList;
 
 public class JuegoController {
     private Batalla batalla;
     private int turno;
+    private Vista vista;
 
     public JuegoController(Batalla batalla) {
         this.batalla = batalla;
         this.turno = primerTurno(batalla);
+        this.vista = new Vista(batalla);
     }
 
     private  static int primerTurno(Batalla batalla){
@@ -29,7 +33,7 @@ public class JuegoController {
         Jugador jugadorActual = batalla.getJugador(this.turno);
         jugadorActual.seleccionarPokemon(); //TODO: Mostrar lista, abstraer en vista y validar (rangos y no elegir poke muertos)
 
-        AdminDeAcciones adminDeAcciones = new AdminDeAcciones(this.batalla, this.turno);
+        AdminDeAcciones adminDeAcciones = new AdminDeAcciones(this.batalla, this.turno, this.vista);
         adminDeAcciones.manejarAcciones();
 
         this.batalla.actualizarEstado();
