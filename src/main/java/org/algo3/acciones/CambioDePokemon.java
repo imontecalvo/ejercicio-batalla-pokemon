@@ -13,6 +13,6 @@ public class CambioDePokemon extends Accion{
 
     @Override
     public void ejecutar() {
-
+        batalla.getJugador(indiceJugador).setPokemonActual(reemplazo);
     }
 }
