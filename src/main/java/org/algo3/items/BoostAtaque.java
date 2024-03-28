@@ -6,12 +6,11 @@ public class BoostAtaque extends Item{
 
     private final static String NOMBRE = "Boost Ataque";
 
-    public BoostAtaque(int cantidad) {
-        super(NOMBRE, cantidad);
+    public BoostAtaque() {
+        super(NOMBRE);
     }
 
     public void usar(Pokemon pokemon){
-        super.usar(pokemon);
         pokemon.boostAtaque();
     }
 }

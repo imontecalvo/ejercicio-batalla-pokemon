@@ -3,7 +3,7 @@ package org.algo3.items;
 public class MegaPocionRestauradora extends PocionRestauradoraDeVida{
     private static final float CAPACIDAD = 50f;
     private static final String NOMBRE = String.format("Mega Pocion restauradora (+%.2f)", CAPACIDAD);
-    public MegaPocionRestauradora(int cantidad) {
-        super(NOMBRE, CAPACIDAD, cantidad);
+    public MegaPocionRestauradora() {
+        super(NOMBRE, CAPACIDAD);
     }
 }
