@@ -1,19 +1,16 @@
 package org.algo3;
 
-import org.algo3.items.*;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
+import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
         ConjuntoPokemones conjuntoPokemones = new ConjuntoPokemones();
-        Juego juego = new JuegoController(conjuntoPokemones);
-        juego.iniciar();
+
+
+        //Juego juego = new JuegoController(conjuntoPokemones);
+        //juego.iniciar();
 /*        ArrayList<Pokemon> l1 = pokemonList(1);
         ArrayList<Pokemon> l2 = pokemonList(2);
 
@@ -36,7 +33,7 @@ public class Main {
         System.out.printf("Batalla terminada. Ganador: %s\n", batalla.getGanador());*/
     }
 
-    private static ArrayList<Pokemon> pokemonList(int n){
+/*    private static ArrayList<Pokemon> pokemonList(int n){
         if (n==1){
             Pokemon p1 = new Pokemon("Pikachu", 1, Tipo.ELECTRICO, ",,,", 100, 200, 30, 75);
             Pokemon p2 = new Pokemon("Charmander", 2, Tipo.FUEGO, ",,,", 200, 100, 100, 80);
@@ -63,5 +60,5 @@ public class Main {
             Item i2 = new HiperPocionRestauradora(2);
             return new ArrayList<>(List.of(i1, i2));
         }
-    }
+    }*/
 }

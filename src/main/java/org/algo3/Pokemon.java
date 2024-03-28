@@ -2,7 +2,7 @@ package org.algo3;
 
 import java.util.Objects;
 
-public class Pokemon {
+public class Pokemon implements Cloneable{
     private final static float BOOST_ATAQUE = 0.1f;
     private final static float BOOST_DEFENSA = 0.1f;
     public String nombre;
@@ -25,6 +25,16 @@ public class Pokemon {
         this.velocidad = velocidad;
         this.defensa = defensa;
         this.ataque = ataque;
+    }
+
+
+    @Override
+    public Pokemon clone() {
+        try {
+            return (Pokemon) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     @Override
