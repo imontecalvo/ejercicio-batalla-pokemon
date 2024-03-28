@@ -1,6 +1,6 @@
 package org.algo3;
 
-import org.algo3.acciones.*;
+//import org.algo3.acciones.*;
 import org.algo3.items.*;
 import org.algo3.vista.Vista;
 
@@ -15,18 +15,18 @@ public class AdminDeAcciones {
     private boolean ataqueRealizado;
 
     private Vista vista;
-    private InteraccionUsuario interaccionUsuario;
 
     public AdminDeAcciones(Batalla batalla, int indiceJugador, Vista vista) {
         this.batalla = batalla;
         this.indiceJugador = indiceJugador;
-        this.jugador = batalla.getJugador(indiceJugador);
-;        this.ataqueRealizado = false;
+        //this.jugador = batalla.getJugador(indiceJugador);
+        this.ataqueRealizado = false;
         this.vista = vista;
-        this.interaccionUsuario = new InteraccionUsuario(batalla);
     }
 
-    public void manejarAcciones(){
+
+
+/*    public void manejarAcciones(){
         while (!this.ataqueRealizado && !this.batalla.estaTerminada()){
             vista.mostrar(this.indiceJugador);
             Accion accion = solicitarAccion();
@@ -93,5 +93,5 @@ public class AdminDeAcciones {
     private Accion manejarAtaque(){
         this.ataqueRealizado = true;
         return new Ataque(this.batalla, this.indiceJugador);
-    }
+    }*/
 }

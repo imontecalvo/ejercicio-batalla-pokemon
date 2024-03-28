@@ -1,14 +1,13 @@
 package org.algo3;
 
-import jdk.jfr.Unsigned;
 import org.algo3.vista.Vista;
-
-import java.util.ArrayList;
 
 public class JuegoController {
     private  Batalla batalla;
-    private int turno;
+    private int turnoActual;
     private Vista vista;
+
+    //admindeacciones
 
     public JuegoController(ConjuntoPokemones conjuntoPokemones, ConjuntoItems conjuntoItems, Vista vista) {
         this.vista = vista;
@@ -21,11 +20,21 @@ public class JuegoController {
         //jugador2.mostrar();
 
         this.batalla = new Batalla(jugador1, jugador2);
-        this.turno = batalla.jugadorConMaxVelocidad();
+        this.turnoActual = batalla.jugadorConMaxVelocidad();
     }
 
-    public void iniciar(){
-        System.out.println("Turno: "+ turno);
+    public void iniciar() {
+
+        while (!batalla.estaTerminada()) {
+            //admindeacciones.manejarturno()
+            batalla.actualizarEstado();
+            cambiarTurno();
+        }
+        System.out.println("Ganador: "+batalla.getGanador());
+    }
+
+    private void cambiarTurno() {
+        turnoActual=(turnoActual+1)% Batalla.CANTIDAD_JUGADORES;
     }
 /*
     private  static int primerTurno(Batalla batalla){

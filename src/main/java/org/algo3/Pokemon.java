@@ -100,4 +100,8 @@ public class Pokemon implements Cloneable{
     public void revivir() {
         this.vida = this.vidaMax;
     }
+
+    public void setVida(int i) {
+        vida=i;
+    }
 }

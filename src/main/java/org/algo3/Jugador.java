@@ -1,10 +1,8 @@
 package org.algo3;
 import org.algo3.items.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Jugador {
     public String nombre;
@@ -41,6 +39,11 @@ public class Jugador {
         }
         return max;
     }
+
+    public boolean tienePokemonesVivos() {
+        return pokemones.stream().anyMatch(p -> p.getVida() > 0);
+    }
+    
 
   /*  public String getNombre() {
         return nombre;

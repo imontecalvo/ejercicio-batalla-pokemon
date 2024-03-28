@@ -1,8 +1,5 @@
 package org.algo3;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 public class Batalla {
     public static final int CANTIDAD_JUGADORES = 2;
     private Jugador[] jugadores;
@@ -65,4 +62,23 @@ public class Batalla {
         }
         return idxJugador;
     }
+
+    public boolean estaTerminada() {
+        return ganador!=null;
+    }
+
+    public void chequearPokemonActivo() {
+
+    }
+
+    public void actualizarEstado() {
+        if (ganador!=null) return;
+        
+        if (!jugadores[0].tienePokemonesVivos()){
+            ganador=jugadores[1];
+        }else if (!jugadores[1].tienePokemonesVivos()) {
+            ganador = jugadores[0];
+        }
+    }
+
 }
