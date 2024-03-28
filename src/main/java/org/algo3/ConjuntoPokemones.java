@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class ConjuntoPokemones {
     private final Random generador;
@@ -48,9 +49,9 @@ public class ConjuntoPokemones {
         HashSet<Pokemon> seleccion = new HashSet<>();
         while (seleccion.size() < cantidad){
             int idx = generador.nextInt(0,pokemonesExistentes.size());
-            seleccion.add(pokemonesExistentes.get(idx).clone());
+            seleccion.add(pokemonesExistentes.get(idx));
         }
 
-        return new ArrayList<>(seleccion);
+        return seleccion.stream().map(Pokemon::clone).toList();
     }
 }
