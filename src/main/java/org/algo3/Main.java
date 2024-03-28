@@ -11,7 +11,10 @@ import java.util.ArrayList;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Pokemon> l1 = pokemonList(1);
+        ConjuntoPokemones conjuntoPokemones = new ConjuntoPokemones();
+        Juego juego = new JuegoController(conjuntoPokemones);
+        juego.iniciar();
+/*        ArrayList<Pokemon> l1 = pokemonList(1);
         ArrayList<Pokemon> l2 = pokemonList(2);
 
         ArrayList<Item> i1 = itemList(1);
@@ -30,7 +33,7 @@ public class Main {
             System.out.println();
         }while (!batalla.estaTerminada());
 
-        System.out.printf("Batalla terminada. Ganador: %s\n", batalla.getGanador());
+        System.out.printf("Batalla terminada. Ganador: %s\n", batalla.getGanador());*/
     }
 
     private static ArrayList<Pokemon> pokemonList(int n){

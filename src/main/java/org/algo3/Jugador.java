@@ -2,19 +2,20 @@ package org.algo3;
 import org.algo3.items.Item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Jugador {
     public String nombre;
-    public ArrayList<Pokemon> pokemones;
+    public List<Pokemon> pokemones;
     private int indicePokemonActual;
-    private ArrayList<Item> items;
+    private List<Item> items;
 
 
-    public Jugador(String nombre, ArrayList<Pokemon> pokemones, int indicePokemonActual, ArrayList<Item> items) {
+    public Jugador(String nombre, List<Pokemon> pokemones, List<Item> items) {
         this.nombre = nombre;
         this.pokemones = pokemones;
-        this.indicePokemonActual = indicePokemonActual;
+        this.indicePokemonActual = 0;
         this.items = items;
     }
 

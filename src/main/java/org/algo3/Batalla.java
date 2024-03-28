@@ -8,8 +8,10 @@ public class Batalla {
     private Jugador[] jugadores;
     private Jugador ganador;
 
-    public Batalla(Jugador[] jugadores) {
-        this.jugadores = jugadores;
+    public Batalla(String nombreJugador1, String nombreJugador2, ConjuntoPokemones conjuntoPokemones) {
+        Jugador jugador1 = generadorDeJugador.generar(nombreJugador1, conjuntoPokemones);
+        Jugador jugador2 = generadorDeJugador.generar(nombreJugador2, conjuntoPokemones);
+        this.jugadores = new Jugador[]{jugador1, jugador2};
         this.ganador = null;
     }
 

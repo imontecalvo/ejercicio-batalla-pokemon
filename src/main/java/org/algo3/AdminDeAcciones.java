@@ -14,8 +14,6 @@ public class AdminDeAcciones {
     private Jugador jugador;
     private boolean ataqueRealizado;
 
-    private HashSet<Item> itemsUsados;
-
     private Vista vista;
     private InteraccionUsuario interaccionUsuario;
 
@@ -41,6 +39,7 @@ public class AdminDeAcciones {
         String[] opciones = {"Rendirse","Cambiar pokemon","Usar item","Atacar"};
         int inputAccion = this.interaccionUsuario.solicitarOpcion(opciones, "accion");
 
+        //TODO: No cumple Open/Closed, no es extensible -> usar hashmap
         return switch (inputAccion) {
             case 1 -> new Rendicion(this.batalla, this.indiceJugador);
             case 2 -> manejarCambioDePokemon();
@@ -52,6 +51,7 @@ public class AdminDeAcciones {
 
     private Accion manejarUsoDeItem() {
         ArrayList<Item> listaItems= jugador.getItems();
+        //TODO: PoLK en item.getNombre() y item.getCantidad()
         String[] opcionesItems = listaItems.stream()
                 .map(item -> String.format("%s x%d",item.getNombre(), item.getCantidad()))
                 .toArray(String[]::new);
@@ -62,6 +62,7 @@ public class AdminDeAcciones {
 
         Pokemon pokemonSeleccionado = jugador.getPokemonActual();
 
+        //TODO: No es extensible
         if (itemSeleccionado instanceof PocionRestauradoraDeVida){
             pokemonSeleccionado = solicitarPokemon(jugador.getPokemonesVivos());
         }else if (itemSeleccionado instanceof Resurreccion){
