@@ -13,6 +13,8 @@ public class Main {
         Vista vista = new Vista();
 
         JuegoController juego = new JuegoController(conjuntoPokemones, conjuntoItems, vista);
+        juego.iniciar();
+
         //juego.iniciar();
 /*        ArrayList<Pokemon> l1 = pokemonList(1);
         ArrayList<Pokemon> l2 = pokemonList(2);

@@ -12,7 +12,7 @@ public class Batalla {
         this.jugadores = new Jugador[]{jugador1, jugador2};
         this.ganador = null;
     }
-
+/*
     public boolean estaTerminada(){
         return this.ganador!=null;
     }
@@ -21,14 +21,6 @@ public class Batalla {
         this.ganador = this.jugadores[indiceGanador];
     }
 
-    public String getGanador() {
-        return ganador.nombre;
-    }
-
-    public Jugador getJugador(int indiceJugador){
-
-        return this.jugadores[indiceJugador];
-    }
     public Jugador getOponente(int indiceJugador){
         return this.jugadores[(indiceJugador+1)%CANTIDAD_JUGADORES];
     }
@@ -52,5 +44,25 @@ public class Batalla {
                 this.ganador = jugador;
             }
         }
+    }*/
+
+    public String getGanador() {
+        return ganador.nombre;
+    }
+    public Jugador getJugador(int indiceJugador){
+
+        return this.jugadores[indiceJugador];
+    }
+
+    public int jugadorConMaxVelocidad() {
+        int idxJugador = 0;
+        float maxVelocidad = 0f;
+        for (int i = 0; i < jugadores.length;i++){
+            if (jugadores[i].maxVelocidad()>maxVelocidad){
+                idxJugador=i;
+                maxVelocidad=jugadores[i].maxVelocidad();
+            }
+        }
+        return idxJugador;
     }
 }

@@ -6,7 +6,7 @@ import org.algo3.vista.Vista;
 import java.util.ArrayList;
 
 public class JuegoController {
-    //private Batalla batalla;
+    private  Batalla batalla;
     private int turno;
     private Vista vista;
 
@@ -20,8 +20,12 @@ public class JuegoController {
         //jugador1.mostrar();
         //jugador2.mostrar();
 
-        //this.batalla = new Batalla(jugador1, jugador2);
-        //this.turno = primerTurno(batalla);
+        this.batalla = new Batalla(jugador1, jugador2);
+        this.turno = batalla.jugadorConMaxVelocidad();
+    }
+
+    public void iniciar(){
+        System.out.println("Turno: "+ turno);
     }
 /*
     private  static int primerTurno(Batalla batalla){

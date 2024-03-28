@@ -25,13 +25,21 @@ public class Jugador {
         System.out.println("Poke actual: "+indicePokemonActual);
         System.out.println("Pokemones:");
         for (Pokemon p : pokemones){
-            System.out.printf("\t- %s ; %.2f/%.2f\n", p.getNombre(), p.getVida(), p.getVidaMax());
+            System.out.printf("\t- %s ; %.2f ; %.2f/%.2f\n", p.getNombre(), p.getVelocidad(), p.getVida(), p.getVidaMax());
         }
 
         System.out.println("\nItems:");
         for ( Map.Entry<Item, Integer> entry: items.entrySet()){
             System.out.printf("\t- %s : %d\n", entry.getKey().getNombre(), entry.getValue() );
         }
+    }
+
+    public float maxVelocidad(){
+        float max = 0;
+        for (Pokemon pokemon : this.pokemones){
+            max = Math.max(max, pokemon.getVelocidad());
+        }
+        return max;
     }
 
   /*  public String getNombre() {
@@ -42,13 +50,7 @@ public class Jugador {
         return pokemones;
     }
 
-    public float maxVelocidad(){
-        float max = 0;
-        for (Pokemon pokemon : this.pokemones){
-            max = Math.max(max, pokemon.getVelocidad());
-        }
-        return max;
-    }
+
 
     //TODO: Agregar validacion y extraer interaccion con usuario
     public void seleccionarPokemon(){
