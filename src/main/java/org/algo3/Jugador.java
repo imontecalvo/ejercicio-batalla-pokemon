@@ -3,23 +3,38 @@ import org.algo3.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Jugador {
     public String nombre;
     public List<Pokemon> pokemones;
     private int indicePokemonActual;
-    private List<Item> items;
+    private Map<Item,Integer> items;
 
 
-    public Jugador(String nombre, List<Pokemon> pokemones, List<Item> items) {
+    public Jugador(String nombre, List<Pokemon> pokemones, Map<Item, Integer> items) {
         this.nombre = nombre;
         this.pokemones = pokemones;
-        this.indicePokemonActual = 0;
         this.items = items;
+        this.indicePokemonActual = 0;
     }
 
-    public String getNombre() {
+    public void mostrar(){
+        System.out.println("Nombre: "+nombre);
+        System.out.println("Poke actual: "+indicePokemonActual);
+        System.out.println("Pokemones:");
+        for (Pokemon p : pokemones){
+            System.out.printf("\t- %s ; %.2f/%.2f\n", p.getNombre(), p.getVida(), p.getVidaMax());
+        }
+
+        System.out.println("\nItems:");
+        for ( Map.Entry<Item, Integer> entry: items.entrySet()){
+            System.out.printf("\t- %s : %d\n", entry.getKey().getNombre(), entry.getValue() );
+        }
+    }
+
+  /*  public String getNombre() {
         return nombre;
     }
 
@@ -72,9 +87,9 @@ public class Jugador {
         return this.pokemones.get(this.indicePokemonActual);
     }
 
-    /*
+    *//*
      * Devuelve todos los pokemones vivos.
-     */
+     *//*
     public ArrayList<Pokemon> getPokemonesVivos() {
         ArrayList<Pokemon> vivos = new ArrayList<>();
         for (Pokemon pokemon : this.pokemones){
@@ -83,10 +98,10 @@ public class Jugador {
         return vivos;
     }
 
-    /*
+    *//*
     * Devuelve los posibles pokemones por los que se puede intercambiar el actual.
     * Esto es, aquellos que estan vivos y son distintos del actual.
-    */
+    *//*
     public ArrayList<Pokemon> getPokemonesSeleccionables(){
         ArrayList<Pokemon> seleccionables = this.getPokemonesVivos();
         Pokemon pokemonActual = pokemones.get(indicePokemonActual);
@@ -94,9 +109,9 @@ public class Jugador {
         return seleccionables;
     }
 
-    /*
+    *//*
      * Devuelve todos los pokemones menos el actual.
-     */
+     *//*
     public ArrayList<Pokemon> getPokemonesRestantes(){
         ArrayList<Pokemon> restantes = (ArrayList<Pokemon>) this.pokemones.clone();
         Pokemon pokemonActual = pokemones.get(indicePokemonActual);
@@ -123,5 +138,5 @@ public class Jugador {
 
     public void eliminarItem(Item item) {
         items.remove(item);
-    }
+    }*/
 }

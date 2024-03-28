@@ -2,6 +2,7 @@ package org.algo3;
 
 import java.util.*;
 import org.algo3.items.*;
+import org.algo3.vista.Vista;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -9,10 +10,9 @@ public class Main {
     public static void main(String[] args) {
         ConjuntoPokemones conjuntoPokemones = new ConjuntoPokemones();
         ConjuntoItems conjuntoItems = new ConjuntoItems();
-        
+        Vista vista = new Vista();
 
-
-        //Juego juego = new JuegoController(conjuntoPokemones);
+        JuegoController juego = new JuegoController(conjuntoPokemones, conjuntoItems, vista);
         //juego.iniciar();
 /*        ArrayList<Pokemon> l1 = pokemonList(1);
         ArrayList<Pokemon> l2 = pokemonList(2);
