@@ -29,8 +29,6 @@ public class ConjuntoItems {
             seleccion.put(item, seleccion.getOrDefault(item, 0) + 1);
         }
 
-        seleccion.put(new Resurreccion(), 1);
-
         return seleccion;
     }
 }

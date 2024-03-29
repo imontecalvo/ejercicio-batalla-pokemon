@@ -50,7 +50,6 @@ public class AdminDeAcciones {
     private Accion solicitarAccion() {
         String[] opciones = {"Rendirse", "Cambiar pokemon", "Usar item", "Atacar"};
         int inputAccion = InteraccionUsuario.solicitarOpcion(opciones, "accion") - 1;
-        System.out.println("Se eligio " + inputAccion);
         return acciones.get(inputAccion).crear(batalla, ejecutor);
     }
 }
