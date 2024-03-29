@@ -2,15 +2,16 @@ package org.algo3.items;
 
 import org.algo3.Pokemon;
 
-public class Resurreccion extends Item{
+public class Resurreccion extends Item {
 
     private static final String NOMBRE = "Resurreccion";
+
     public Resurreccion() {
         super(NOMBRE);
     }
 
     @Override
-    public void usar(Pokemon pokemon){
+    public void usar(Pokemon pokemon) {
         pokemon.revivir();
     }
 }

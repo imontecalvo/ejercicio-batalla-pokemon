@@ -3,8 +3,9 @@ package org.algo3.acciones;
 import org.algo3.Batalla;
 import org.algo3.Jugador;
 
-public class Ataque extends Accion{
-    private Jugador atacado;
+public class Ataque extends Accion {
+    private final Jugador atacado;
+
     public Ataque(Batalla batalla, Jugador ejecutor) {
         super(batalla, ejecutor);
         this.atacado = batalla.getOponente(ejecutor);
@@ -18,7 +19,7 @@ public class Ataque extends Accion{
     }
 
     @Override
-    public boolean esAtaque(){
+    public boolean esAtaque() {
         return true;
     }
 }

@@ -3,7 +3,7 @@ package org.algo3.items;
 import org.algo3.Pokemon;
 
 public abstract class Item {
-    private String nombre;
+    private final String nombre;
 
     public Item(String nombre) {
         this.nombre = nombre;

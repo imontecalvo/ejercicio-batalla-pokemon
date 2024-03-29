@@ -2,7 +2,7 @@ package org.algo3.items;
 
 import org.algo3.Pokemon;
 
-public class BoostAtaque extends Item{
+public class BoostAtaque extends Item {
 
     private final static String NOMBRE = "Boost Ataque";
 
@@ -11,7 +11,7 @@ public class BoostAtaque extends Item{
     }
 
     @Override
-    public void usar(Pokemon pokemon){
+    public void usar(Pokemon pokemon) {
         pokemon.boostAtaque();
     }
 }

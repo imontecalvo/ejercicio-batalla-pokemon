@@ -5,9 +5,9 @@ import org.algo3.Jugador;
 import org.algo3.Pokemon;
 import org.algo3.items.Item;
 
-public class UsoDeItem extends Accion{
-    private Item item;
-    private Pokemon pokemonAfectado;
+public class UsoDeItem extends Accion {
+    private final Item item;
+    private final Pokemon pokemonAfectado;
 
     public UsoDeItem(Batalla batalla, Jugador ejecutor, Item item, Pokemon pokemonAfectado) {
         super(batalla, ejecutor);
@@ -16,7 +16,7 @@ public class UsoDeItem extends Accion{
     }
 
     @Override
-    public void ejecutar(){
+    public void ejecutar() {
         item.usar(pokemonAfectado);
         ejecutor.gastarItem(item);
     }

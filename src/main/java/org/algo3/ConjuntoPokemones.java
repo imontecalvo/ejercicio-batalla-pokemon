@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class ConjuntoPokemones {
     private final Random generador;
@@ -12,7 +11,7 @@ public class ConjuntoPokemones {
 
     public ConjuntoPokemones() {
         generador = new Random();
-        pokemonesExistentes = new ArrayList<Pokemon>();
+        pokemonesExistentes = new ArrayList<>();
 
         this.pokemonesExistentes.add(new Pokemon("Bulbasaur", 1, Tipo.PLANTA, ",,,", 300, 30, 30, 30));
         this.pokemonesExistentes.add(new Pokemon("Ivysaur", 2, Tipo.PLANTA, ",,,", 400, 40, 50, 40));
@@ -42,13 +41,13 @@ public class ConjuntoPokemones {
     }
 
     public List<Pokemon> obtenerRandom(int cantidad) {
-        if (cantidad > pokemonesExistentes.size()){
+        if (cantidad > pokemonesExistentes.size()) {
             throw new RuntimeException("Error: No hay suficientes pokemones");
         }
 
         HashSet<Pokemon> seleccion = new HashSet<>();
-        while (seleccion.size() < cantidad){
-            int idx = generador.nextInt(0,pokemonesExistentes.size());
+        while (seleccion.size() < cantidad) {
+            int idx = generador.nextInt(0, pokemonesExistentes.size());
             seleccion.add(pokemonesExistentes.get(idx));
         }
 

@@ -21,9 +21,6 @@ public class Main {
         Jugador jugador1 = generadorJugador.generar(1);
         Jugador jugador2 = generadorJugador.generar(2);
 
-        //jugador1.mostrar();
-        //jugador2.mostrar();
-
         Batalla batalla = new Batalla(jugador1, jugador2);
         return new JuegoController(batalla, vista);
     }

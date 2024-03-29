@@ -23,10 +23,10 @@ public class ConjuntoItems {
 
     public HashMap<Item, Integer> obtenerRandom(int cantidad) {
         HashMap<Item, Integer> seleccion = new HashMap<>();
-        for (int i=0; i<cantidad; i++){
+        for (int i = 0; i < cantidad; i++) {
             int idx = generador.nextInt(0, itemsExistentes.size());
             Item item = itemsExistentes.get(idx);
-            seleccion.put(item, seleccion.getOrDefault(item,0)+1);
+            seleccion.put(item, seleccion.getOrDefault(item, 0) + 1);
         }
 
         seleccion.put(new Resurreccion(), 1);
