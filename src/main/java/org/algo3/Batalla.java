@@ -82,7 +82,11 @@ public class Batalla {
         return jugadores;
     }
 
-    public Jugador getOponente(Jugador ejecutor) {
-        return jugadores[0] == ejecutor ? jugadores[1] : jugadores[0];
+    public Jugador getOponente(Jugador jugador) {
+        return jugadores[0] == jugador ? jugadores[1] : jugadores[0];
+    }
+
+    public void rendirse(Jugador jugador) {
+        ganador = getOponente(jugador);
     }
 }

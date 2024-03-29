@@ -17,10 +17,7 @@ public class UsoDeItem extends Accion{
 
     @Override
     public void ejecutar(){
-/*        this.item.usar(this.pokemonAfectado);
-        if (item.getCantidad() == 0){
-            Jugador jugador = batalla.getJugador(indiceJugador);
-            jugador.eliminarItem(item);
-        }*/
+        item.usar(pokemonAfectado);
+        ejecutor.gastarItem(item);
     }
 }

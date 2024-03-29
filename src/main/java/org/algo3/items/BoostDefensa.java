@@ -9,6 +9,7 @@ public class BoostDefensa extends Item{
         super(NOMBRE);
     }
 
+    @Override
     public void usar(Pokemon pokemon){
         pokemon.boostDefensa();
     }

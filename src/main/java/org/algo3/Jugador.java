@@ -73,6 +73,25 @@ public class Jugador {
         return pokemones.get(indicePokemonActual);
     }
 
+    public float getAtaqueTotal() {
+        return getPokemonActual().getAtaque();
+    }
+
+    public void recibirAtaque(float ataque) {
+        getPokemonActual().reducirVida(ataque);
+    }
+
+    public void setPokemonActual(Pokemon reemplazo) {
+        indicePokemonActual = pokemones.indexOf(reemplazo);
+    }
+
+    public void gastarItem(Item item) {
+        items.put(item, items.get(item)-1);
+        if (items.get(item)==0){
+            items.remove(item);
+        }
+    }
+
 
 
   /*  public String getNombre() {

@@ -13,4 +13,6 @@ public abstract class Item {
         return nombre;
     }
 
+    public abstract void usar(Pokemon pokemonAfectado);
+
 }

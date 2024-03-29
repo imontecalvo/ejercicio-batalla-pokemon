@@ -13,7 +13,7 @@ public class Ataque extends Accion{
     //TODO: Calcular ataque con todas las variables y su respectiva formula
     @Override
     public void ejecutar() {
-        //final float ataque = this.ejecutor.getPokemonActual().getAtaque();
-        //this.atacado.getPokemonActual().reducirVida(ataque);
+        float ataque = ejecutor.getAtaqueTotal();
+        atacado.recibirAtaque(ataque);
     }
 }

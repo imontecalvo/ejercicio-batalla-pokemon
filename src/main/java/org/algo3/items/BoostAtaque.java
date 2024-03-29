@@ -10,6 +10,7 @@ public class BoostAtaque extends Item{
         super(NOMBRE);
     }
 
+    @Override
     public void usar(Pokemon pokemon){
         pokemon.boostAtaque();
     }

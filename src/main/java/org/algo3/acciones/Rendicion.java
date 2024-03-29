@@ -10,8 +10,7 @@ public class Rendicion extends Accion{
 
     @Override
     public void ejecutar() {
-//        int indiceOponente = (this.indiceJugador+1)%Batalla.CANTIDAD_JUGADORES;
-//        this.batalla.setGanador(indiceOponente);
+        batalla.rendirse(ejecutor);
     }
 
 }

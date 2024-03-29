@@ -10,6 +10,7 @@ public class PocionRestauradoraDeVida extends Item {
         this.tipo = tipo;
     }
 
+    @Override
     public void usar(Pokemon pokemon){
         pokemon.restaurarVida(tipo.getCapacidad());
     }
