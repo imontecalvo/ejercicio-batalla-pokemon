@@ -1,23 +1,25 @@
 package org.algo3.vista;
 
+import org.algo3.Batalla;
 import org.algo3.Jugador;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Vista {
-//    private Batalla batalla;
+    private Batalla batalla;
     private Scanner scanner;
 
-    public Vista() {
+    public Vista(Batalla batalla) {
         this.scanner = new Scanner(System.in);
+        this.batalla = batalla;
     }
 
-/*    public void mostrar(int indiceJugador){
+    public void mostrar(Jugador jugadorActual){
         clearConsole();
         Jugador[] jugadores = batalla.getJugadores();
         System.out.printf("\n\n============================== Turno de %s ==============================\n\n",
-                jugadores[indiceJugador].getNombre());
+                jugadorActual.getNombre());
 
         for (Jugador jugador : jugadores){
             VistaJugador.mostrar(jugador);
@@ -38,7 +40,7 @@ public class Vista {
         }catch (final Exception e){
             System.err.println(e);
         }
-    }*/
+    }
 
     public void iniciar() {
         System.out.printf("╔%s╗\n","═".repeat(75));
@@ -46,9 +48,4 @@ public class Vista {
         System.out.printf("╚%s╝\n\n\n","═".repeat(75));
     }
 
-    public String solicitarJugador(int numero) {
-        System.out.printf("=> Ingrese el nombre del jugador %d: ", numero);
-        String nombre = scanner.next();
-        return nombre;
-    }
 }

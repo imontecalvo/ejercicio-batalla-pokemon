@@ -67,9 +67,6 @@ public class Batalla {
         return ganador!=null;
     }
 
-    public void chequearPokemonActivo() {
-
-    }
 
     public void actualizarEstado() {
         if (ganador!=null) return;
@@ -81,4 +78,11 @@ public class Batalla {
         }
     }
 
+    public Jugador[] getJugadores() {
+        return jugadores;
+    }
+
+    public Jugador getOponente(Jugador ejecutor) {
+        return jugadores[0] == ejecutor ? jugadores[1] : jugadores[0];
+    }
 }

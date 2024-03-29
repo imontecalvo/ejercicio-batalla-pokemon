@@ -1,6 +1,7 @@
 package org.algo3;
 import org.algo3.items.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,36 @@ public class Jugador {
     public boolean tienePokemonesVivos() {
         return pokemones.stream().anyMatch(p -> p.getVida() > 0);
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public List<Pokemon> getPokemonesVivos() {
+        return pokemones.stream().filter(Pokemon::estaVivo).toList();
+    }
+
+    public List<Pokemon> getPokemonesMuertos() {
+        return pokemones.stream().filter(p -> !p.estaVivo()).toList();
+    }
+
+
+    public List<Pokemon> getPokemonesSeleccionables(){
+        List<Pokemon> seleccionables = this.getPokemonesVivos();
+        Pokemon pokemonActual = pokemones.get(indicePokemonActual);
+        seleccionables.remove(pokemonActual);
+        return seleccionables;
+    }
+
+    public Map<Item,Integer> getItems() {
+        return items;
+    }
+
+    public Pokemon getPokemonActual() {
+        return pokemones.get(indicePokemonActual);
+    }
+
+
 
   /*  public String getNombre() {
         return nombre;

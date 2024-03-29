@@ -9,24 +9,17 @@ public class JuegoController {
 
     //admindeacciones
 
-    public JuegoController(ConjuntoPokemones conjuntoPokemones, ConjuntoItems conjuntoItems, Vista vista) {
+    public JuegoController(Batalla batalla, Vista vista) {
+        this.batalla = batalla;
         this.vista = vista;
-        vista.iniciar();
-        GeneradorJugador generadorJugador = new GeneradorJugador(vista, conjuntoPokemones, conjuntoItems);
-        Jugador jugador1 = generadorJugador.generar(1);
-        Jugador jugador2 = generadorJugador.generar(2);
-
-        //jugador1.mostrar();
-        //jugador2.mostrar();
-
-        this.batalla = new Batalla(jugador1, jugador2);
         this.turnoActual = batalla.jugadorConMaxVelocidad();
+        vista.iniciar();
     }
 
     public void iniciar() {
-
         while (!batalla.estaTerminada()) {
-            //admindeacciones.manejarturno()
+            AdminDeAcciones adminDeAcciones = new AdminDeAcciones(batalla, turnoActual, vista);
+            adminDeAcciones.manejarAcciones();
             batalla.actualizarEstado();
             cambiarTurno();
         }
