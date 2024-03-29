@@ -43,9 +43,10 @@ public class AdminDeAcciones {
     }
 
     private void chequearPokemonActivo(){
-/*        if (!ejecutor.pokemonActivoVivo()){
-            vista.solicitarPokemon();
-        }*/
+        if (!ejecutor.pokemonActivoVivo()){
+            Pokemon seleccionado = InteraccionUsuario.solicitarPokemon(ejecutor.getPokemonesVivos());
+            ejecutor.setPokemonActual(seleccionado);
+        }
     }
 
     private Accion solicitarAccion(){

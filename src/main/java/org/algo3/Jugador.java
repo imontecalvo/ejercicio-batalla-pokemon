@@ -92,6 +92,10 @@ public class Jugador {
         }
     }
 
+    public boolean pokemonActivoVivo() {
+        return pokemones.get(indicePokemonActual).estaVivo();
+    }
+
 
 
   /*  public String getNombre() {
