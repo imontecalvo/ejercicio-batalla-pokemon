@@ -16,4 +16,9 @@ public class Ataque extends Accion{
         float ataque = ejecutor.getAtaqueTotal();
         atacado.recibirAtaque(ataque);
     }
+
+    @Override
+    public boolean esAtaque(){
+        return true;
+    }
 }

@@ -16,6 +16,7 @@ public class AccionFactoryUsoDeItem extends AccionFactory{
     public Accion crear(Batalla batalla, Jugador ejecutor) {
         Map<Item,Integer> mapaItems= ejecutor.getItems();
         Item itemSeleccionado = InteraccionUsuario.solicitarItem(mapaItems);
+        if (itemSeleccionado==null) return null;
 
         Pokemon pokemonSeleccionado = ejecutor.getPokemonActual();
 

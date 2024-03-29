@@ -13,7 +13,6 @@ public class JuegoController {
         this.batalla = batalla;
         this.vista = vista;
         this.turnoActual = batalla.jugadorConMaxVelocidad();
-        vista.iniciar();
     }
 
     public void iniciar() {

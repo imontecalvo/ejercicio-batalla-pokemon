@@ -7,17 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Vista {
-    private Batalla batalla;
-    private Scanner scanner;
-
-    public Vista(Batalla batalla) {
-        this.scanner = new Scanner(System.in);
-        this.batalla = batalla;
-    }
-
-    public void mostrar(Jugador jugadorActual){
+    public void mostrar(Jugador jugadorActual, Jugador[] jugadores){
         clearConsole();
-        Jugador[] jugadores = batalla.getJugadores();
         System.out.printf("\n\n============================== Turno de %s ==============================\n\n",
                 jugadorActual.getNombre());
 

@@ -13,4 +13,8 @@ public abstract class Accion {
     }
 
     public abstract void ejecutar();
+
+    public boolean esAtaque() {
+        return false;
+    }
 }

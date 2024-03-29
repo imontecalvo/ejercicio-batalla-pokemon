@@ -26,6 +26,14 @@ public abstract class InteraccionUsuario {
         return pokemones.get(indicePokemon);
     }
 
+    public static Pokemon solicitarPokemonActivo(List<Pokemon> pokemones, String usuario) {
+        System.out.printf("\n\n%s, tu pokemon activo fue derrotado. Debés seleccionar otro.\n", usuario);
+        String[] opcionesPokemon = pokemones.stream().map(Pokemon::getNombre).toArray(String[]::new);
+        int indicePokemon = solicitarOpcion(opcionesPokemon,"pokemon")-1;
+        if (cancelarSeleccion(indicePokemon, pokemones.size())) return null;
+        return pokemones.get(indicePokemon);
+    }
+
     /*
      * Recibe un mapa de items. Solicita al usuario un item.
      * Devuelve el item elegido en caso de elegir un item.
@@ -33,7 +41,7 @@ public abstract class InteraccionUsuario {
      * */
     public static Item solicitarItem(Map<Item, Integer> mapaItems) {
         String[] opcionesItems = new String[mapaItems.size()];
-        Item[] listaItems = (Item[]) mapaItems.keySet().toArray();
+        Item[] listaItems = mapaItems.keySet().toArray(Item[]::new);
 
         for (int i=0; i<listaItems.length; i++){
             Item item = listaItems[i];
@@ -102,6 +110,7 @@ public abstract class InteraccionUsuario {
     private static boolean esValido(int input, int cantOpciones){
         return (input >= 1) && (input <= cantOpciones);
     }
+
 
 
 }

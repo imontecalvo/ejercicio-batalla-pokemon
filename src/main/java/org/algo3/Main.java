@@ -13,6 +13,8 @@ public class Main {
     }
 
     private static JuegoController getJuegoController() {
+        Vista vista = new Vista();
+        vista.iniciar();
         ConjuntoPokemones conjuntoPokemones = new ConjuntoPokemones();
         ConjuntoItems conjuntoItems = new ConjuntoItems();
         GeneradorJugador generadorJugador = new GeneradorJugador(conjuntoPokemones, conjuntoItems);
@@ -23,7 +25,6 @@ public class Main {
         //jugador2.mostrar();
 
         Batalla batalla = new Batalla(jugador1, jugador2);
-        Vista vista = new Vista(batalla);
         return new JuegoController(batalla, vista);
     }
 }

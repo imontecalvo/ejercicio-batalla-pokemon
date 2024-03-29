@@ -27,31 +27,32 @@ public class AdminDeAcciones {
 
         acciones = new ArrayList<>();
         acciones.add(new AccionFactoryRendicion());
-        acciones.add(new AccionFactoryAtaque());
         acciones.add(new AccionFactoryCambioDePokemon());
         acciones.add(new AccionFactoryUsoDeItem());
+        acciones.add(new AccionFactoryAtaque());
     }
 
     public void manejarAcciones() {
         chequearPokemonActivo();
         while (!this.ataqueRealizado && !this.batalla.estaTerminada()){
-            vista.mostrar(ejecutor);
+            vista.mostrar(ejecutor, batalla.getJugadores());
             Accion accion = solicitarAccion();
             if (accion==null) continue;
+            ataqueRealizado = accion.esAtaque();
             accion.ejecutar();
         }
     }
 
     private void chequearPokemonActivo(){
         if (!ejecutor.pokemonActivoVivo()){
-            Pokemon seleccionado = InteraccionUsuario.solicitarPokemon(ejecutor.getPokemonesVivos());
+            Pokemon seleccionado = InteraccionUsuario.solicitarPokemonActivo(ejecutor.getPokemonesVivos(),ejecutor.getNombre());
             ejecutor.setPokemonActual(seleccionado);
         }
     }
 
     private Accion solicitarAccion(){
         String[] opciones = {"Rendirse","Cambiar pokemon","Usar item","Atacar"};
-        int inputAccion = InteraccionUsuario.solicitarOpcion(opciones, "accion");
+        int inputAccion = InteraccionUsuario.solicitarOpcion(opciones, "accion")-1;
         return acciones.get(inputAccion).crear(batalla, ejecutor);
     }
 }
