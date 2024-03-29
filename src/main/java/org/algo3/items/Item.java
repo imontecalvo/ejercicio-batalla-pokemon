@@ -3,23 +3,16 @@ package org.algo3.items;
 import org.algo3.Pokemon;
 
 public abstract class Item {
-    private String nombre;
-    protected int cantidad;
+    private final String nombre;
 
-    public Item(String nombre, int cantidad) {
+    public Item(String nombre) {
         this.nombre = nombre;
-        this.cantidad = cantidad;
-    }
-
-    public void usar(Pokemon pokemon){
-        this.cantidad--;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
+    public abstract void usar(Pokemon pokemonAfectado);
+
 }

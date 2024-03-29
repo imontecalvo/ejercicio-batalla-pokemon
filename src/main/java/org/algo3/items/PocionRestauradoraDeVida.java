@@ -2,15 +2,17 @@ package org.algo3.items;
 
 import org.algo3.Pokemon;
 
-public abstract class PocionRestauradoraDeVida extends Item {
-    private float capacidad;
-    public PocionRestauradoraDeVida(String nombre, float capacidad, int cantidad) {
-        super(nombre, cantidad);
-        this.capacidad = capacidad;
+public class PocionRestauradoraDeVida extends Item {
+    private final TipoPocion tipo;
+    private final static String NOMBRE = "Pocion Restauradora";
+
+    public PocionRestauradoraDeVida(TipoPocion tipo) {
+        super(String.format("%s %s (+%.2f)", NOMBRE, tipo.name(), tipo.getCapacidad()));
+        this.tipo = tipo;
     }
 
-    public void usar(Pokemon pokemon){
-        super.usar(pokemon);
-        pokemon.restaurarVida(capacidad);
+    @Override
+    public void usar(Pokemon pokemon) {
+        pokemon.restaurarVida(tipo.getCapacidad());
     }
 }

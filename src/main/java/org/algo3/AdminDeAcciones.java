@@ -1,96 +1,55 @@
 package org.algo3;
 
+//import org.algo3.acciones.*;
+
 import org.algo3.acciones.*;
-import org.algo3.items.*;
+import org.algo3.acciones.factory.*;
 import org.algo3.vista.Vista;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.List;
 
 public class AdminDeAcciones {
-    private Batalla batalla;
-    private int indiceJugador;
-    private Jugador jugador;
+    private final Batalla batalla;
+    private final Jugador ejecutor;
     private boolean ataqueRealizado;
-
-    private HashSet<Item> itemsUsados;
-
-    private Vista vista;
-    private InteraccionUsuario interaccionUsuario;
+    private final List<AccionFactory> acciones;
+    private final Vista vista;
 
     public AdminDeAcciones(Batalla batalla, int indiceJugador, Vista vista) {
         this.batalla = batalla;
-        this.indiceJugador = indiceJugador;
-        this.jugador = batalla.getJugador(indiceJugador);
-;        this.ataqueRealizado = false;
+        this.ejecutor = batalla.getJugador(indiceJugador);
+        this.ataqueRealizado = false;
         this.vista = vista;
-        this.interaccionUsuario = new InteraccionUsuario(batalla);
+
+        acciones = new ArrayList<>();
+        acciones.add(new AccionFactoryRendicion());
+        acciones.add(new AccionFactoryCambioDePokemon());
+        acciones.add(new AccionFactoryUsoDeItem());
+        acciones.add(new AccionFactoryAtaque());
     }
 
-    public void manejarAcciones(){
-        while (!this.ataqueRealizado && !this.batalla.estaTerminada()){
-            vista.mostrar(this.indiceJugador);
+    public void manejarAcciones() {
+        chequearPokemonActivo();
+        while (!this.ataqueRealizado && !this.batalla.estaTerminada()) {
+            vista.mostrar(ejecutor, batalla.getJugadores());
             Accion accion = solicitarAccion();
-            if (accion==null) continue;
+            if (accion == null) continue;
+            ataqueRealizado = accion.esAtaque();
             accion.ejecutar();
         }
     }
 
-    private Accion solicitarAccion(){
-        String[] opciones = {"Rendirse","Cambiar pokemon","Usar item","Atacar"};
-        int inputAccion = this.interaccionUsuario.solicitarOpcion(opciones, "accion");
-
-        return switch (inputAccion) {
-            case 1 -> new Rendicion(this.batalla, this.indiceJugador);
-            case 2 -> manejarCambioDePokemon();
-            case 3 -> manejarUsoDeItem();
-            case 4 -> manejarAtaque();
-            default -> null;
-        };
-    }
-
-    private Accion manejarUsoDeItem() {
-        ArrayList<Item> listaItems= jugador.getItems();
-        String[] opcionesItems = listaItems.stream()
-                .map(item -> String.format("%s x%d",item.getNombre(), item.getCantidad()))
-                .toArray(String[]::new);
-
-        int indiceItem = this.interaccionUsuario.solicitarOpcion(opcionesItems, "item", true)-1;
-        if (cancelarSeleccion(indiceItem, listaItems.size())) return null;
-        Item itemSeleccionado= listaItems.get(indiceItem);
-
-        Pokemon pokemonSeleccionado = jugador.getPokemonActual();
-
-        if (itemSeleccionado instanceof PocionRestauradoraDeVida){
-            pokemonSeleccionado = solicitarPokemon(jugador.getPokemonesVivos());
-        }else if (itemSeleccionado instanceof Resurreccion){
-            pokemonSeleccionado = solicitarPokemon(jugador.getPokemonesMuertos());
+    private void chequearPokemonActivo() {
+        if (!ejecutor.pokemonActivoVivo()) {
+            Pokemon seleccionado = InteraccionUsuario.solicitarPokemonActivo(ejecutor.getPokemonesVivos(), ejecutor.getNombre());
+            ejecutor.setPokemonActual(seleccionado);
         }
-
-        if (pokemonSeleccionado==null) return null;
-        return new UsoDeItem(batalla, indiceJugador, itemSeleccionado, pokemonSeleccionado);
     }
 
-    private Pokemon solicitarPokemon(ArrayList<Pokemon> pokemones){
-        String[] opcionesPokemon = pokemones.stream().map(Pokemon::getNombre).toArray(String[]::new);
-        int indicePokemon = interaccionUsuario.solicitarOpcion(opcionesPokemon,"pokemon", true)-1;
-        if (cancelarSeleccion(indicePokemon, pokemones.size())) return null;
-        return pokemones.get(indicePokemon);
-    }
-
-    private boolean cancelarSeleccion(int opcion, int cantidadOpciones){
-        return opcion == cantidadOpciones;
-    }
-
-    private Accion manejarCambioDePokemon(){
-        Pokemon pokemonSeleccionado = solicitarPokemon(jugador.getPokemonesSeleccionables());
-        if (pokemonSeleccionado==null) return null;
-        return new CambioDePokemon(batalla, indiceJugador, pokemonSeleccionado);
-    }
-
-    private Accion manejarAtaque(){
-        this.ataqueRealizado = true;
-        return new Ataque(this.batalla, this.indiceJugador);
+    private Accion solicitarAccion() {
+        String[] opciones = {"Rendirse", "Cambiar pokemon", "Usar item", "Atacar"};
+        int inputAccion = InteraccionUsuario.solicitarOpcion(opciones, "accion") - 1;
+        return acciones.get(inputAccion).crear(batalla, ejecutor);
     }
 }

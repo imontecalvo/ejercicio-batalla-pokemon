@@ -2,16 +2,16 @@ package org.algo3;
 
 import java.util.Objects;
 
-public class Pokemon {
+public class Pokemon implements Cloneable{
     private final static float BOOST_ATAQUE = 0.1f;
     private final static float BOOST_DEFENSA = 0.1f;
     public String nombre;
-    private int nivel;
-    private Tipo tipo;
-    private String historia;
+    private final int nivel;
+    private final Tipo tipo;
+    private final String historia;
     public float vida;
-    private float vidaMax;
-    private float velocidad;
+    private final float vidaMax;
+    private final float velocidad;
     private float defensa;
     private float ataque;
 
@@ -25,6 +25,16 @@ public class Pokemon {
         this.velocidad = velocidad;
         this.defensa = defensa;
         this.ataque = ataque;
+    }
+
+
+    @Override
+    public Pokemon clone() {
+        try {
+            return (Pokemon) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     @Override
@@ -67,14 +77,6 @@ public class Pokemon {
         this.vida = Math.max(0, this.vida - ataque);
     }
 
-    public void matar(){
-        this.vida = 0;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public void boostAtaque(){
         this.ataque+=this.ataque*BOOST_ATAQUE;
     }
@@ -90,4 +92,5 @@ public class Pokemon {
     public void revivir() {
         this.vida = this.vidaMax;
     }
+
 }

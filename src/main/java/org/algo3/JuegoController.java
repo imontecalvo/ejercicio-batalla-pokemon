@@ -2,45 +2,34 @@ package org.algo3;
 
 import org.algo3.vista.Vista;
 
-import java.util.ArrayList;
-
 public class JuegoController {
-    private Batalla batalla;
-    private int turno;
-    private Vista vista;
+    private final Batalla batalla;
+    private int turnoActual;
+    private final Vista vista;
 
-    public JuegoController(Batalla batalla) {
-        this.batalla = batalla;
-        this.turno = primerTurno(batalla);
-        this.vista = new Vista(batalla);
+    public JuegoController(ConjuntoPokemones conjuntoPokemones, ConjuntoItems conjuntoItems) {
+        vista = new Vista();
+        vista.iniciar();
+
+        GeneradorJugador generadorJugador = new GeneradorJugador(conjuntoPokemones, conjuntoItems);
+        Jugador jugador1 = generadorJugador.generar(1);
+        Jugador jugador2 = generadorJugador.generar(2);
+
+        this.batalla = new Batalla(jugador1, jugador2);
+        this.turnoActual = batalla.jugadorConMaxVelocidad();
     }
 
-    private  static int primerTurno(Batalla batalla){
-        int indiceJugador = 0;
-        float maxVelocidadTotal = 0;
-        for (int i = 0; i < Batalla.CANTIDAD_JUGADORES; i++){
-            float velocidadActual = batalla.getJugador(i).maxVelocidad();
-            if (velocidadActual > maxVelocidadTotal){
-                maxVelocidadTotal = velocidadActual;
-                indiceJugador = i;
-            }
+    public void iniciar() {
+        while (!batalla.estaTerminada()) {
+            AdminDeAcciones adminDeAcciones = new AdminDeAcciones(batalla, turnoActual, vista);
+            adminDeAcciones.manejarAcciones();
+            batalla.actualizarEstado();
+            cambiarTurno();
         }
-
-        return indiceJugador;
+        System.out.println("Ganador: " + batalla.getGanador());
     }
 
-    public void jugarTurno(){
-        Jugador jugadorActual = batalla.getJugador(this.turno);
-        jugadorActual.seleccionarPokemon();
-
-        AdminDeAcciones adminDeAcciones = new AdminDeAcciones(this.batalla, this.turno, this.vista);
-        adminDeAcciones.manejarAcciones();
-
-        this.batalla.actualizarEstado();
-        this.cambiarTurno();
-    }
-
-    private void cambiarTurno(){
-        this.turno = (this.turno+1)%Batalla.CANTIDAD_JUGADORES;
+    private void cambiarTurno() {
+        turnoActual = (turnoActual + 1) % Batalla.CANTIDAD_JUGADORES;
     }
 }
