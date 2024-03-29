@@ -60,9 +60,7 @@ public class Jugador {
 
 
     public List<Pokemon> getPokemonesSeleccionables(){
-        List<Pokemon> seleccionables = this.getPokemonesVivos();
-        seleccionables.remove(indicePokemonActual);
-        return seleccionables;
+        return pokemones.stream().filter(p->p.estaVivo() && p!=pokemones.get(indicePokemonActual)).toList();
     }
 
     public Map<Item,Integer> getItems() {

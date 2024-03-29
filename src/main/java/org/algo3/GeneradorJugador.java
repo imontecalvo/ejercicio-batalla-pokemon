@@ -3,7 +3,6 @@ package org.algo3;
 import java.util.List;
 import java.util.Map;
 
-import org.algo3.vista.Vista;
 import org.algo3.items.Item;
 
 public class GeneradorJugador {
